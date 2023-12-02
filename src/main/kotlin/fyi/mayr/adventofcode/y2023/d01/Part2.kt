@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     part2(lines)
 }
 
-fun part2(lines: List<String>) {
+private fun part2(lines: List<String>) {
     val sum = lines
         .map(::extractNumber)
         .sum()
