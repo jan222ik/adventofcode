@@ -56,9 +56,13 @@ private sealed class Part(val name: String) {
 }
 
 @AdventOfCodeDsl
-fun adventOfCode(year: Int, day: Int, block: AdventOfCodeScope.() -> Unit): Runnable {
+fun adventOfCodeRunable(year: Int, day: Int, block: AdventOfCodeScope.() -> Unit): Runnable {
     val scope = AdventOfCodeScopeImpl(year, day)
     block(scope)
     return scope
 }
+
+@AdventOfCodeDsl
+fun adventOfCode(year: Int, day: Int, block: AdventOfCodeScope.() -> Unit) = adventOfCodeRunable(year, day, block).run()
+
 

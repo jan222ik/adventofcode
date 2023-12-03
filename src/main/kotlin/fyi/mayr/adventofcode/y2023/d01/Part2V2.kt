@@ -7,7 +7,7 @@ fun main() = adventOfCode(2023, 3) {
     part2("V2", scope = Part2V2) {
         lines.sumOf { extractNumber(it) }
     }
-}.run()
+}
 
 private object Part2V2 {
 

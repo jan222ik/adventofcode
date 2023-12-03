@@ -29,7 +29,7 @@ fun main() = adventOfCode(2022, 2) {
             inputMatcher = { inputMapping[it]!! },
             outputMatcher = { c, g -> strategyMappingPart2[c]!!.invoke(g) }).sumOf { it.score }
     }
-}.run()
+}
 
 private enum class Gesture(val score: Int) {
     Rock(1), Paper(2), Scissors(3);

@@ -7,7 +7,7 @@ fun main() = adventOfCode(2023, 1) {
     part1 {
         lines.sumOf { extractNumber(it) }
     }
-}.run()
+}
 
 private fun extractNumber(input: String): Int {
     return input.first(Char::isDigit).digitToInt().times(10)

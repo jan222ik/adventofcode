@@ -10,7 +10,7 @@ fun main() = adventOfCode(2022, 1) {
     part2 {
         caloriesPerElf(lines).apply { sortDescending() }.take(3).sum()
     }
-}.run()
+}
 
 private fun caloriesPerElf(lines: List<String>): MutableList<Int> {
     return lines.asSequence()

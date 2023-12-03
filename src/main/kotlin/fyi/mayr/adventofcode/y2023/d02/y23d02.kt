@@ -18,7 +18,7 @@ fun main() = adventOfCode(2023, 2) {
         val colors = listOf("red", "green", "blue")
         lines.sumOf { powerOfGame(it, colors) }
     }
-}.run()
+}
 
 private object Part1 {
     private val REGEX_GAME_ID = "Game (?<id>\\d+):".toRegex()
