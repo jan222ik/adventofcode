@@ -1,33 +1,35 @@
 package fyi.mayr.adventofcode.y2022.d02
 
-import java.io.File
+import fyi.mayr.adventofcode.util.adventOfCode
 
-fun main() {
-    val lines = File("src/main/kotlin/fyi/mayr/adventofcode/y2022/d02/input.txt").readLines()
+fun main() = adventOfCode(2022, 2) {
+    val lines = defaultInputFile.readLines()
     val inputMapping = mapOf(
         'A' to Gesture.Rock,
         'B' to Gesture.Paper,
         'C' to Gesture.Scissors
     )
-    val strategyMappingPart1 = mapOf(
-        'Y' to Gesture.Paper,
-        'X' to Gesture.Rock,
-        'Z' to Gesture.Scissors
-    )
-    val strategyMappingPart2 = mapOf<Char, (Gesture) -> Gesture>(
-        'X' to { g -> g.winAgainst() }, // Should lose, so get the one the input wins against
-        'Y' to { g -> g.drawAgainst() },
-        'Z' to { g -> g.lossAgainst() } // Should win, so get the one the input loses against
-    )
-    val part1 = parse(lines = lines,
-        inputMatcher = { inputMapping[it]!! },
-        outputMatcher = { c, _ -> strategyMappingPart1[c]!! }).sumOf { it.score }
-    println("y22d02p1: $part1")
-    val part2 = parse(lines = lines,
-        inputMatcher = { inputMapping[it]!! },
-        outputMatcher = { c, g -> strategyMappingPart2[c]!!.invoke(g) }).sumOf { it.score }
-    println("y22d02p2: $part2")
-}
+    part1 {
+        val strategyMappingPart1 = mapOf(
+            'Y' to Gesture.Paper,
+            'X' to Gesture.Rock,
+            'Z' to Gesture.Scissors
+        )
+        parse(lines = lines,
+            inputMatcher = { inputMapping[it]!! },
+            outputMatcher = { c, _ -> strategyMappingPart1[c]!! }).sumOf { it.score }
+    }
+    part2 {
+        val strategyMappingPart2 = mapOf<Char, (Gesture) -> Gesture>(
+            'X' to { g -> g.winAgainst() }, // Should lose, so get the one the input wins against
+            'Y' to { g -> g.drawAgainst() },
+            'Z' to { g -> g.lossAgainst() } // Should win, so get the one the input loses against
+        )
+        parse(lines = lines,
+            inputMatcher = { inputMapping[it]!! },
+            outputMatcher = { c, g -> strategyMappingPart2[c]!!.invoke(g) }).sumOf { it.score }
+    }
+}.run()
 
 private enum class Gesture(val score: Int) {
     Rock(1), Paper(2), Scissors(3);
