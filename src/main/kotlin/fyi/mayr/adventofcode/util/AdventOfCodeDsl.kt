@@ -17,7 +17,7 @@ interface AdventOfCodeScope {
     val defaultInputFile : File
 }
 @AdventOfCodeDsl
-class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfCodeScope {
+private class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfCodeScope, Runnable {
     private val partNames = mutableSetOf<String>()
     private val parts = mutableListOf<Part>()
 
@@ -37,14 +37,14 @@ class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfCodeScope
     override val defaultInputFile: File
         get() = File("src/main/kotlin/fyi/mayr/adventofcode/y$year/d$dayPadded/input.txt")
 
-    fun execute() {
+    override fun run() {
         parts.forEach {
             println("Y$year - Day $dayPadded - Part ${it.name}: ${it.runBlock().toString()}")
         }
     }
 }
 
-sealed class Part(val name: String) {
+private sealed class Part(val name: String) {
     abstract fun runBlock() : Any?
     class Unscoped(name: String, private val block: () -> Any?) : Part(name) {
         override fun runBlock(): Any? = block()
@@ -59,6 +59,6 @@ sealed class Part(val name: String) {
 fun adventOfCode(year: Int, day: Int, block: AdventOfCodeScope.() -> Unit): Runnable {
     val scope = AdventOfCodeScopeImpl(year, day)
     block(scope)
-    return Runnable{ scope.execute() }
+    return scope
 }
 
