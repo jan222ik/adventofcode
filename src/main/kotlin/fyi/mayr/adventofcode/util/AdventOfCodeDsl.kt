@@ -14,7 +14,9 @@ interface AdventOfCodeScope {
     fun <T> part(name: String, scope: T, block: T.() -> Any?)
     fun <T> part1(suffix: String = "", scope: T, block: T.() -> Any?) = part("1$suffix", scope, block)
     fun <T> part2(suffix: String = "", scope: T, block: T.() -> Any?) = part("2$suffix", scope, block)
+
     val defaultInputFile : File
+    val exampleInputFile : File
 }
 @AdventOfCodeDsl
 private class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfCodeScope, Runnable {
@@ -36,6 +38,9 @@ private class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfC
 
     override val defaultInputFile: File
         get() = File("src/main/kotlin/fyi/mayr/adventofcode/y$year/d$dayPadded/input.txt")
+
+    override val exampleInputFile: File
+        get() = File("src/main/kotlin/fyi/mayr/adventofcode/y$year/d$dayPadded/example.txt")
 
     override fun run() {
         parts.forEach {
