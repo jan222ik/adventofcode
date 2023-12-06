@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     implementation("org.testng:testng:7.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC")
     testImplementation(kotlin("test"))
 }
 
