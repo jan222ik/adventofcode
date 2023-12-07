@@ -1,6 +1,7 @@
 package fyi.mayr.adventofcode.util
 
 import java.io.File
+import kotlin.time.measureTimedValue
 
 
 @DslMarker
@@ -44,7 +45,10 @@ private class AdventOfCodeScopeImpl(private val year: Int, day: Int) : AdventOfC
 
     override fun run() {
         parts.forEach {
-            println("Y$year - Day $dayPadded - Part ${it.name}: ${it.runBlock().toString()}")
+            val runBlock = measureTimedValue {
+                it.runBlock()
+            }
+            println("Y$year - Day $dayPadded - [${runBlock.duration}] Part ${it.name}: ${runBlock.value.toString()}")
         }
     }
 }
