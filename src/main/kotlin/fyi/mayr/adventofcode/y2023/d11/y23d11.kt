@@ -22,7 +22,7 @@ fun main() = adventOfCode(2023, 11) {
 
     part1 {
         findGalaxyPositions(lines)
-            .getCombinations()
+            .createCombinations()
             .sumOf(
                 calculateMinDistance(
                     determineExpandedRowIndices(lines),
@@ -34,7 +34,7 @@ fun main() = adventOfCode(2023, 11) {
 
     part2 {
         findGalaxyPositions(lines)
-            .getCombinations()
+            .createCombinations()
             .sumOf(
                 calculateMinDistance(
                     determineExpandedRowIndices(lines),
@@ -63,7 +63,7 @@ private fun calculateMinDistance(
             expandCols.count { idx -> colRange.contains(idx) }.toLong().times(expansionFactor - 1)
 }
 
-private fun List<Point>.getCombinations() = getCombinations(this)
+private fun List<Point>.createCombinations() = getCombinations(this)
 
 private fun getCombinations(positions: List<Point>): List<Pair<Point, Point>> {
     return buildList {
